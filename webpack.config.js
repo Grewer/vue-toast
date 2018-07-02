@@ -8,7 +8,10 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   module: {
-    rules: [{
+    rules: [ {
+        test: /\.vue$/,
+        loader: 'vue-loader'
+      },{
       test: /\.js$/,
       include: [path.resolve(__dirname, 'src')],
       loader: 'babel-loader',
@@ -21,7 +24,14 @@ module.exports = {
       }
     }]
   },
-
+  externals: {
+    vue: 'vue'
+  },
+  resolve: {
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js'
+    }
+  },
   entry: {
     index: './src/index.js'
   },
