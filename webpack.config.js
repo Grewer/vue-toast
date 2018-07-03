@@ -4,24 +4,27 @@ const path = require('path')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 
+const {VueLoaderPlugin} = require('vue-loader')
 
 
 module.exports = {
   module: {
-    rules: [ {
-        test: /\.vue$/,
-        loader: 'vue-loader'
-      },{
+    rules: [{
+      test: /\.vue$/,
+      loader: 'vue-loader',
+    }, {
       test: /\.js$/,
-      include: [path.resolve(__dirname, 'src')],
       loader: 'babel-loader',
-
-      options: {
-        presets: ['env', {
-          modules: false
-        }],
-        plugins: ['syntax-dynamic-import']
-      }
+      exclude: /node_modules/
+    },{
+      test: /\.css$/,
+      use: [
+        'vue-style-loader',
+        {
+          loader: 'css-loader',
+          options: { importLoaders: 1 }
+        },
+      ]
     }]
   },
   externals: {
@@ -38,22 +41,11 @@ module.exports = {
 
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
+    library: 'vue-toast',
+    libraryTarget: 'umd'
   },
-
-  optimization: {
-    splitChunks: {
-      chunks: 'async',
-      minSize: 30000,
-      minChunks: 1,
-      name: true,
-
-      cacheGroups: {
-        vendors: {
-          test: /[\\/]node_modules[\\/]/,
-          priority: -10
-        }
-      }
-    }
-  }
+  plugins: [
+    new VueLoaderPlugin()
+  ]
 }
