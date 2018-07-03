@@ -12,15 +12,24 @@
       content: {
         required: true,
         type: String
+      },
+      time: {
+        type: Number,
+        default: 0
       }
     },
-    data() {
-      return {
-        time: 0 // todo props
+    watch: {
+      time(n) {
+        setTimeout(() => {
+          if (this.time > 0) {
+            this.$emit('update:time', this.time-1)
+          }
+        }, 1000)
       }
     },
     methods: {
       clickBox() {
+        // click hide
         console.log('click')
       }
     }
@@ -30,22 +39,21 @@
 </script>
 <style scoped>
     .box {
-        width: 1.26rem;
-        height: .2rem;
+        word-break: break-all;
+        max-width: 30%;
         background-color: rgba(0, 0, 0, .8);
         color: #ffffff;
-        font-size: .32rem;
         position: fixed;
-        border-radius: .08rem;
-        top: -10%;
-        left: 0;
-        right: 0;
-        bottom: 0;
+        border-radius: .2em;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%);
+        transform: translate3d(-50%, 0, 0);
         margin: auto;
         display: flex;
         align-items: center;
         text-align: center;
-        padding: 0.4rem;
+        padding: .5em 1em;
         z-index: 2500;
     }
 
@@ -59,10 +67,10 @@
 
     @keyframes bounce-in {
         0% {
-            transform: scale(0);
+            opacity: 0;
         }
         100% {
-            transform: scale(1);
+            opacity: 1;
         }
     }
 </style>
