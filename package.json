@@ -1,8 +1,9 @@
 {
-  "name": "vue-toast",
-  "version": "1.0.0",
+  "name": "vue-js-toast",
+  "version": "1.0.2",
   "description": "vue toast plugin",
   "main": "dist/index.js",
+  "repository": "https://github.com/Grewer/vue-toast.git",
   "scripts": {
     "build": "webpack --mode production"
   },
@@ -10,7 +11,7 @@
     "vue",
     "toast"
   ],
-  "author": "grewer",
+  "author": "grewer<grewer@grewer.cn>",
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.26.3",

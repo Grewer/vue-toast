@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-import Toast from 'vue-toast'
+import Toast from 'vue-js-toast'
 
 Vue.use(Toast)
 

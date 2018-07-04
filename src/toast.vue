@@ -18,19 +18,31 @@
         default: 0
       }
     },
+    data() {
+      return {
+        asyncFun: null,
+      }
+    },
     watch: {
       time(n) {
-        setTimeout(() => {
-          if (this.time > 0) {
-            this.$emit('update:time', this.time-1)
-          }
-        }, 1000)
+        if (this.asyncFun === null) {
+          this.setTime()
+        }
       }
     },
     methods: {
+      setTime() {
+        this.asyncFun = setTimeout(() => {
+          if (this.time > 0) {
+            this.$emit('update:time', this.time-1)
+            this.setTime()
+          } else {
+            this.asyncFun = null
+          }
+        }, 1000)
+      },
       clickBox() {
-        // click hide
-        console.log('click')
+        this.$emit('update:time', 0)
       }
     }
 
@@ -55,6 +67,7 @@
         text-align: center;
         padding: .5em 1em;
         z-index: 2500;
+        cursor: pointer;
     }
 
     .bounce-enter-active {
