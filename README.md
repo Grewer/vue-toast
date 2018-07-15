@@ -9,7 +9,7 @@ npm i -S vue-js-toast
 ```
 
 ```vue
-<Toast content="获取失败" :time.sync="time"></Toast>
+<Toast :time.sync="time">获取失败!!!</Toast>
 ```
 
 main.js:

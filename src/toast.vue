@@ -1,7 +1,7 @@
 <template>
     <transition name="bounce">
         <div class="box" v-if="!!time" @click="clickBox">
-            {{content}}
+            <slot></slot>
         </div>
     </transition>
 </template>
@@ -9,10 +9,6 @@
 <script>
   export default {
     props: {
-      content: {
-        required: true,
-        type: String
-      },
       time: {
         type: Number,
         default: 0
@@ -34,7 +30,7 @@
       setTime() {
         this.asyncFun = setTimeout(() => {
           if (this.time > 0) {
-            this.$emit('update:time', this.time-1)
+            this.$emit('update:time', this.time - 1)
             this.setTime()
           } else {
             this.asyncFun = null
@@ -68,6 +64,7 @@
         padding: .5em 1em;
         z-index: 2500;
         cursor: pointer;
+        flex-direction: column;
     }
 
     .bounce-enter-active {

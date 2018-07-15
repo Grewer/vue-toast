@@ -16,7 +16,7 @@
       <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
     </ul>
-    <Toast content="获取失败" :time.sync="time"></Toast>
+    <Toast :time.sync="time"><img src="./assets/logo.png" alt="logo">获取失败!!!</Toast>
     <button @click="changeTime">changeTime</button>
   </div>
 </template>
@@ -32,7 +32,7 @@
     },
     methods: {
       changeTime() {
-        this.time = 5
+        this.time = 100
       }
     }
   }
